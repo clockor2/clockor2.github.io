@@ -22,10 +22,10 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-
-      #- run: npm ci
+        env:
+            NODE_OPTIONS: "--max_old_space_size=4096"
       - run: npm install
-      - run: NODE_OPTIONS="--max_old_space_size=4096" npm run build
+      - run: npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
